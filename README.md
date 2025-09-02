@@ -13,28 +13,30 @@ An advanced AI-powered system that automatically detects and rectifies common da
 This project follows clean software architecture principles with clear separation of concerns:
 
 ```
-AutoDataFix/
-├── 📁 backend/                    # Python FastAPI backend
-│   ├── app/                      # Application core
-│   │   ├── api/                  # API routes and endpoints
-│   │   ├── core/                 # Configuration and utilities
-│   │   ├── models/               # Database models
-│   │   ├── services/             # Business logic layer
-│   │   └── ml/                   # Machine learning components
-│   ├── database/                 # Database files
-│   └── storage/                  # File storage (uploads, models, logs)
-├── 📁 frontend/                   # React TypeScript frontend
-│   ├── public/                   # Static assets
-│   └── src/                      # Source code
-│       ├── components/           # Reusable UI components
-│       ├── pages/                # Page components
-│       └── services/             # API communication
-├── 📁 tests/                     # Test files
-├── 📁 docs/                      # Documentation
-├── 📁 config/                    # Configuration files
-├── 📁 scripts/                   # Utility scripts
-├── 📁 examples/                  # Sample datasets for testing
-└── 📁 venv/                      # Python virtual environment
+DataCleanAI/
+├── backend/                    # Python FastAPI backend
+│   ├── app/                   # Application core
+│   │   ├── api/              # API routes and endpoints
+│   │   ├── core/             # Configuration and utilities
+│   │   ├── models/           # Database models
+│   │   ├── services/         # Business logic layer
+│   │   └── ml/               # Machine learning components
+│   ├── database/             # Database files
+│   ├── static/               # Static files (if any)
+│   └── storage/              # File storage (uploads, models, logs)
+├── frontend/                 # React TypeScript frontend
+│   ├── public/               # Static assets
+│   └── src/                  # Source code
+│       ├── components/       # Reusable UI components
+│       ├── pages/            # Page components
+│       └── services/         # API communication
+├── tests/                    # Test files for backend
+├── docs/                     # Documentation
+├── config/                   # Configuration files
+├── scripts/                  # Utility and start scripts (e.g., start_backend.sh, start_frontend.sh)
+├── examples/                 # Sample datasets for testing
+├── LICENSE                   # License file
+└── README.md                 # Project overview
 ```
 
 ## 🚀 Quick Start
@@ -47,7 +49,12 @@ AutoDataFix/
 ### Installation
 
 #### Option 1: Quick Setup (Recommended)
+All start and setup scripts are located in the `scripts/` folder.
 ```bash
+cd scripts
+./start_backend.sh
+./start_frontend.sh
+```
 # Clone and navigate
 git clone <repository-url>
 cd AutoDataFix
