@@ -14,29 +14,29 @@ This project follows clean software architecture principles with clear separatio
 
 ```
 DataCleanAI/
-├── backend/                    # Python FastAPI backend
-│   ├── app/                   # Application core
-│   │   ├── api/              # API routes and endpoints
-│   │   ├── core/             # Configuration and utilities
-│   │   ├── models/           # Database models
-│   │   ├── services/         # Business logic layer
-│   │   └── ml/               # Machine learning components
-│   ├── database/             # Database files
-│   ├── static/               # Static files (if any)
-│   └── storage/              # File storage (uploads, models, logs)
-├── frontend/                 # React TypeScript frontend
-│   ├── public/               # Static assets
-│   └── src/                  # Source code
-│       ├── components/       # Reusable UI components
-│       ├── pages/            # Page components
-│       └── services/         # API communication
-├── tests/                    # Test files for backend
-├── docs/                     # Documentation
-├── config/                   # Configuration files
-├── scripts/                  # Utility and start scripts (e.g., start_backend.sh, start_frontend.sh)
-├── examples/                 # Sample datasets for testing
-├── LICENSE                   # License file
-└── README.md                 # Project overview
+├── 📁 backend/                    # Python FastAPI backend
+│   ├── 📁 app/                   # Application core
+│   │   ├── 📁 api/              # API routes and endpoints
+│   │   ├── 📁 core/             # Configuration and utilities
+│   │   ├── 📁 models/           # Database models
+│   │   ├── 📁 services/         # Business logic layer
+│   │   └── 📁 ml/               # Machine learning components
+│   ├── 📁 database/             # Database files
+│   ├── 📁 static/               # Static files (if any)
+│   └── 📁 storage/              # File storage (uploads, models, logs)
+├── 📁 frontend/                 # React TypeScript frontend
+│   ├── 📁 public/               # Static assets
+│   └── 📁 src/                  # Source code
+│       ├── 📁 components/       # Reusable UI components
+│       ├── 📁 pages/            # Page components
+│       └── 📁 services/         # API communication
+├── 📁 tests/                    # Test files for backend
+├── 📁 docs/                     # Documentation
+├── 📁 config/                   # Configuration files
+├── 📁 scripts/                  # Utility and start scripts (e.g., start_backend.sh, start_frontend.sh)
+├── 📁 examples/                 # Sample datasets for testing
+├── 📄 LICENSE                   # License file
+└── 📄 README.md                 # Project overview
 ```
 
 ## 🚀 Quick Start
