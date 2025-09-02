@@ -68,11 +68,21 @@ cd AutoDataFix
 # Backend setup
 python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r config/requirements.txt
+pip install fastapi uvicorn sqlalchemy pandas numpy scipy scikit-learn missingno plotly pydantic-settings python-multipart
 
 # Frontend setup
 cd frontend
 npm install
+```
+
+### Environment variables
+```bash
+# Generate a SECRET_KEY for backend/.env (run once)
+python - <<'PY'
+import secrets, pathlib
+pathlib.Path('backend/.env').write_text('SECRET_KEY='+secrets.token_urlsafe(32)+'\n')
+print('Wrote backend/.env (SECRET_KEY set)')
+PY
 ```
 
 ### Running the Application
@@ -81,7 +91,7 @@ npm install
 ```bash
 source venv/bin/activate
 cd backend
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 ```
 
 #### Start Frontend
