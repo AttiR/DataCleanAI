@@ -33,3 +33,9 @@ build/
 /.env
 *.csv
 backend/storage/uploads/
+backend/.env
+tests/__pycache__/
+**/__pycache__/
+*.pyc
+.pytest_cache/
+backend/database/*.db

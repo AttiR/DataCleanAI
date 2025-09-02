@@ -13,7 +13,7 @@ def test_data_creation():
 
     # Create a sample dataset with various issues
     data = {
-        'id': range(1, 101),
+        'id': list(range(1, 101)),
         'name': ['John', 'Jane', None, 'Bob', 'Alice'] * 20,
         'age': [25, 30, 35, None, 40, 45, 50, 55, 60, 65] * 10,
         'salary': [50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000, 130000, 140000] * 10,
