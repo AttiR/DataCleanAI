@@ -1,0 +1,33 @@
+# Node.js dependencies
+node_modules/
+
+# Python virtual environments
+venv/
+.env/
+.env.local
+.env.*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# IDE/editor config files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Build output directories
+dist/
+build/
+
+# Other temporary or system files
+*.tmp
+*.bak
+*.swp
+
+# Your specific environment files
+/.env
