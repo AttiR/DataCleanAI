@@ -31,3 +31,5 @@ build/
 
 # Your specific environment files
 /.env
+*.csv
+backend/storage/uploads/
