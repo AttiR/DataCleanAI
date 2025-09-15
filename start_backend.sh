@@ -14,15 +14,12 @@ fi
 echo "📦 Activating virtual environment..."
 source venv/bin/activate
 
-# Change to backend directory
-echo "📂 Changing to backend directory..."
-cd backend
-
-# Start the backend
+# Start the backend from project root with proper Python path
 echo "🎯 Starting FastAPI backend on http://localhost:8000"
 echo "📚 API Documentation: http://localhost:8000/docs"
 echo ""
 echo "Press Ctrl+C to stop the backend"
 echo ""
 
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+# Run uvicorn from project root with backend directory in Python path
+PYTHONPATH="${PYTHONPATH}:$(pwd)/backend" uvicorn backend.app.main:app --reload --host 0.0.0.0 --port 8000

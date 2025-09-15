@@ -6,8 +6,10 @@ import os
 from datetime import datetime
 
 from app.core.database import get_db
+from app.core.dependencies import get_current_verified_user
 from app.models.dataset import Dataset
 from app.models.processing_job import ProcessingJob
+from app.models.user import User
 from app.services.dataset_service import DatasetService
 from app.core.config import settings
 
@@ -17,7 +19,8 @@ router = APIRouter()
 @router.post("/upload")
 async def upload_dataset(
     file: UploadFile = File(...),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_verified_user)
 ):
     """
     Upload a dataset file (CSV, Excel, etc.)
@@ -62,7 +65,8 @@ async def upload_dataset(
             row_count=len(df),
             column_count=len(df.columns),
             column_info={col: str(dtype) for col, dtype in df.dtypes.to_dict().items()},
-            status="uploaded"
+            status="uploaded",
+            user_id=current_user.id
         )
 
         db.add(dataset)
@@ -85,11 +89,16 @@ async def upload_dataset(
 
 
 @router.get("/")
-async def list_datasets(db: Session = Depends(get_db)):
+async def list_datasets(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_verified_user)
+):
     """
-    List all uploaded datasets
+    List all uploaded datasets for the current user
     """
-    datasets = db.query(Dataset).order_by(Dataset.created_at.desc()).all()
+    datasets = db.query(Dataset).filter(
+        Dataset.user_id == current_user.id
+    ).order_by(Dataset.created_at.desc()).all()
 
     return {
         "datasets": [
@@ -109,11 +118,18 @@ async def list_datasets(db: Session = Depends(get_db)):
 
 
 @router.get("/{dataset_id}")
-async def get_dataset(dataset_id: int, db: Session = Depends(get_db)):
+async def get_dataset(
+    dataset_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_verified_user)
+):
     """
     Get dataset details and preview
     """
-    dataset = db.query(Dataset).filter(Dataset.id == dataset_id).first()
+    dataset = db.query(Dataset).filter(
+        Dataset.id == dataset_id,
+        Dataset.user_id == current_user.id
+    ).first()
 
     if not dataset:
         raise HTTPException(status_code=404, detail="Dataset not found")
@@ -142,11 +158,18 @@ async def get_dataset(dataset_id: int, db: Session = Depends(get_db)):
 
 
 @router.delete("/{dataset_id}")
-async def delete_dataset(dataset_id: int, db: Session = Depends(get_db)):
+async def delete_dataset(
+    dataset_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_verified_user)
+):
     """
     Delete a dataset
     """
-    dataset = db.query(Dataset).filter(Dataset.id == dataset_id).first()
+    dataset = db.query(Dataset).filter(
+        Dataset.id == dataset_id,
+        Dataset.user_id == current_user.id
+    ).first()
 
     if not dataset:
         raise HTTPException(status_code=404, detail="Dataset not found")
@@ -176,13 +199,20 @@ async def delete_dataset(dataset_id: int, db: Session = Depends(get_db)):
 
 
 @router.get("/{dataset_id}/download")
-async def download_dataset(dataset_id: int, db: Session = Depends(get_db)):
+async def download_dataset(
+    dataset_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_verified_user)
+):
     """
     Download the cleaned dataset file
     """
     from fastapi.responses import FileResponse
 
-    dataset = db.query(Dataset).filter(Dataset.id == dataset_id).first()
+    dataset = db.query(Dataset).filter(
+        Dataset.id == dataset_id,
+        Dataset.user_id == current_user.id
+    ).first()
     if not dataset:
         raise HTTPException(status_code=404, detail="Dataset not found")
 
@@ -213,13 +243,16 @@ async def download_dataset(dataset_id: int, db: Session = Depends(get_db)):
 
 
 @router.delete("/")
-async def delete_all_datasets(db: Session = Depends(get_db)):
+async def delete_all_datasets(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_verified_user)
+):
     """
-    Delete all datasets and their associated jobs
+    Delete all datasets and their associated jobs for the current user
     """
     try:
-        # Get all datasets
-        datasets = db.query(Dataset).all()
+        # Get all datasets for the current user
+        datasets = db.query(Dataset).filter(Dataset.user_id == current_user.id).all()
 
         # Delete all processing jobs first
         all_jobs = db.query(ProcessingJob).all()
