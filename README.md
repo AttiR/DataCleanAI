@@ -196,19 +196,5 @@ See [CONTRIBUTING.md](docs/CONTRIBUTING.md) for detailed guidelines.
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🆘 Support
-
-- **Documentation**: Check the [docs](docs/) folder
-- **Issues**: Create an issue on GitHub
-- **API Reference**: Visit http://localhost:8000/docs when running
-
-## 🔗 Links
-
-- **Project Documentation**: [docs/](docs/)
-- **API Documentation**: [docs/api/](docs/api/)
-- **User Guide**: [docs/user/](docs/user/)
-- **Developer Guide**: [docs/dev/](docs/dev/)
-
----
 
 **Built with ❤️ for data scientists and analysts**

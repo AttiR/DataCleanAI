@@ -163,7 +163,7 @@ const Home: React.FC = () => {
 
       {/* Features Section */}
       <Box sx={{ py: 8, backgroundColor: 'rgba(255, 255, 255, 0.95)' }}>
-        <Container maxWidth="lg">
+        <Container maxWidth="md">
           <Typography
             variant="h3"
             component="h2"
@@ -173,15 +173,17 @@ const Home: React.FC = () => {
           >
             Why Choose AutoDataFix?
           </Typography>
-          <Grid container spacing={4}>
+          <Grid container spacing={3} justifyContent="center">
             {features.map((feature, index) => (
-              <Grid item xs={12} md={6} lg={4} key={index}>
+              <Grid item xs={12} sm={6} md={4} key={index}>
                 <Fade in timeout={1000 + index * 200}>
                   <Card
                     sx={{
                       height: '100%',
                       display: 'flex',
                       flexDirection: 'column',
+                      maxWidth: 320,
+                      mx: 'auto',
                       transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
                       '&:hover': {
                         transform: 'translateY(-8px)',
@@ -195,14 +197,14 @@ const Home: React.FC = () => {
                         variant="h6"
                         component="h3"
                         gutterBottom
-                        sx={{ fontWeight: 'bold', color: 'text.primary' }}
+                        sx={{ fontWeight: 'bold', color: 'text.primary', fontSize: '1.1rem' }}
                       >
                         {feature.title}
                       </Typography>
                       <Typography
                         variant="body2"
                         color="text.secondary"
-                        sx={{ lineHeight: 1.6 }}
+                        sx={{ lineHeight: 1.6, fontSize: '0.9rem' }}
                       >
                         {feature.description}
                       </Typography>
@@ -238,7 +240,7 @@ const Home: React.FC = () => {
                 variant="h6"
                 sx={{ mb: 4, opacity: 0.9 }}
               >
-                Join thousands of users who trust AutoDataFix for their data quality needs.
+                Experience the power of AI-driven data cleaning and analysis.
               </Typography>
               <Button
                 variant="contained"

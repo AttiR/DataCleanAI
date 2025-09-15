@@ -118,12 +118,17 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   );
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{
+      display: 'flex',
+      width: '100%',
+      minHeight: '100vh'
+    }}>
       <AppBar
         position="fixed"
         sx={{
           width: { md: `calc(100% - ${drawerWidth}px)` },
           ml: { md: `${drawerWidth}px` },
+          zIndex: theme.zIndex.drawer + 1,
         }}
       >
         <Toolbar>
@@ -257,10 +262,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         sx={{
           flexGrow: 1,
           width: { md: `calc(100% - ${drawerWidth}px)` },
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
         }}
       >
         <Toolbar />
-        {children}
+        <Box sx={{
+          flex: 1,
+          width: '100%',
+          padding: { xs: 2, sm: 3, md: 4 },
+          backgroundColor: 'background.default',
+        }}>
+          {children}
+        </Box>
       </Box>
     </Box>
   );

@@ -73,22 +73,28 @@ const Login: React.FC = () => {
     <Box
       sx={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        background: '#f8fafc',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 2,
+        padding: 4,
       }}
     >
-      <Container maxWidth="sm">
+      <Box
+        sx={{
+          width: '100%',
+          maxWidth: 400,
+          mx: 'auto',
+        }}
+      >
         <Fade in timeout={800}>
           <Paper
-            elevation={24}
+            elevation={8}
             sx={{
               borderRadius: 3,
               overflow: 'hidden',
-              background: 'rgba(255, 255, 255, 0.95)',
-              backdropFilter: 'blur(10px)',
+              background: '#ffffff',
+              border: '1px solid #e2e8f0',
             }}
           >
             <Box
@@ -268,7 +274,7 @@ const Login: React.FC = () => {
             </CardContent>
           </Paper>
         </Fade>
-      </Container>
+      </Box>
     </Box>
   );
 };

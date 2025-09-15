@@ -488,17 +488,20 @@ const Dashboard: React.FC = () => {
 
     return (
     <Box sx={{
-      p: { xs: 2, sm: 3, md: 4 },
-      minHeight: 'calc(100vh - 64px)', // Account for AppBar height
       width: '100%',
-      maxWidth: '100%'
+      minHeight: '100vh',
+      backgroundColor: 'background.default',
     }}>
       {/* Header Section */}
       <Box sx={{
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        mb: 4
+        mb: 4,
+        p: { xs: 2, sm: 3, md: 4 },
+        backgroundColor: 'background.paper',
+        borderBottom: '1px solid',
+        borderColor: 'divider',
       }}>
         <Box>
           <Typography variant="h4" component="h1" gutterBottom>
@@ -529,7 +532,8 @@ const Dashboard: React.FC = () => {
       </Box>
 
       {/* Stats Cards */}
-      <Grid container spacing={{ xs: 2, sm: 3, md: 4 }} sx={{ mb: 5, width: '100%' }}>
+      <Box sx={{ p: { xs: 2, sm: 3, md: 4 } }}>
+        <Grid container spacing={{ xs: 2, sm: 3, md: 4 }} sx={{ mb: 5, width: '100%' }}>
         <Grid item xs={12} sm={6} md={3}>
           <StatCard
             title="Total Datasets"
@@ -566,13 +570,13 @@ const Dashboard: React.FC = () => {
             subtitle={stats.total > 0 ? "Data quality score" : "Upload data to see quality"}
           />
         </Grid>
-      </Grid>
+        </Grid>
 
-      {/* Quality Insights Section */}
-      <QualityInsights datasets={datasets?.data?.datasets || []} />
+        {/* Quality Insights Section */}
+        <QualityInsights datasets={datasets?.data?.datasets || []} />
 
-      {/* Recent Activity Section */}
-      <Grid container spacing={3}>
+        {/* Recent Activity Section */}
+        <Grid container spacing={3}>
         <Grid item xs={12} lg={8}>
           <Card sx={{
             height: '100%',
@@ -743,7 +747,8 @@ const Dashboard: React.FC = () => {
             </Card>
           </Box>
         </Grid>
-      </Grid>
+        </Grid>
+      </Box>
 
       {/* Clear Data Confirmation Dialog */}
       <Dialog
