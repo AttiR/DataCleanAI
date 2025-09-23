@@ -18,11 +18,9 @@ import {
   CheckCircle as CheckIcon,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
 
   const features = [
     {
@@ -58,11 +56,7 @@ const Home: React.FC = () => {
   ];
 
   const handleGetStarted = () => {
-    if (isAuthenticated) {
-      navigate('/');
-    } else {
-      navigate('/register');
-    }
+    navigate('/dashboard');
   };
 
   return (
@@ -131,30 +125,8 @@ const Home: React.FC = () => {
                     },
                   }}
                 >
-                  {isAuthenticated ? 'Go to Dashboard' : 'Get Started Free'}
+                  Get Started Free
                 </Button>
-                {!isAuthenticated && (
-                  <Button
-                    variant="outlined"
-                    size="large"
-                    onClick={() => navigate('/login')}
-                    sx={{
-                      py: 1.5,
-                      px: 4,
-                      fontSize: '1.1rem',
-                      fontWeight: 600,
-                      borderRadius: 2,
-                      borderColor: 'white',
-                      color: 'white',
-                      '&:hover': {
-                        borderColor: 'white',
-                        backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                      },
-                    }}
-                  >
-                    Sign In
-                  </Button>
-                )}
               </Box>
             </Box>
           </Fade>
@@ -259,7 +231,7 @@ const Home: React.FC = () => {
                   },
                 }}
               >
-                {isAuthenticated ? 'Go to Dashboard' : 'Start Free Trial'}
+                Start Free Trial
               </Button>
             </Box>
           </Fade>

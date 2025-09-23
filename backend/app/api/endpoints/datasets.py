@@ -1,15 +1,11 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException, Depends
 from sqlalchemy.orm import Session
-from typing import List
-import pandas as pd
 import os
 from datetime import datetime
 
 from app.core.database import get_db
-from app.core.dependencies import get_current_verified_user
 from app.models.dataset import Dataset
 from app.models.processing_job import ProcessingJob
-from app.models.user import User
 from app.services.dataset_service import DatasetService
 from app.core.config import settings
 
@@ -19,8 +15,7 @@ router = APIRouter()
 @router.post("/upload")
 async def upload_dataset(
     file: UploadFile = File(...),
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_verified_user)
+    db: Session = Depends(get_db)
 ):
     """
     Upload a dataset file (CSV, Excel, etc.)
@@ -37,9 +32,10 @@ async def upload_dataset(
 
     # Validate file size
     if file.size > settings.MAX_FILE_SIZE:
+        max_size_mb = settings.MAX_FILE_SIZE / (1024 * 1024)
         raise HTTPException(
             status_code=400,
-            detail=f"File too large. Max size: {settings.MAX_FILE_SIZE / (1024*1024)}MB"
+            detail=f"File too large. Max size: {max_size_mb}MB"
         )
 
     try:
@@ -64,9 +60,11 @@ async def upload_dataset(
             file_type=file_extension,
             row_count=len(df),
             column_count=len(df.columns),
-            column_info={col: str(dtype) for col, dtype in df.dtypes.to_dict().items()},
+            column_info={
+                col: str(dtype) for col, dtype in df.dtypes.to_dict().items()
+            },
             status="uploaded",
-            user_id=current_user.id
+            user_id=1  # Hardcoded since auth is disabled
         )
 
         db.add(dataset)
@@ -90,15 +88,12 @@ async def upload_dataset(
 
 @router.get("/")
 async def list_datasets(
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_verified_user)
+    db: Session = Depends(get_db)
 ):
     """
-    List all uploaded datasets for the current user
+    List all uploaded datasets (no user filter since auth is disabled)
     """
-    datasets = db.query(Dataset).filter(
-        Dataset.user_id == current_user.id
-    ).order_by(Dataset.created_at.desc()).all()
+    datasets = db.query(Dataset).order_by(Dataset.created_at.desc()).all()
 
     return {
         "datasets": [
@@ -120,16 +115,12 @@ async def list_datasets(
 @router.get("/{dataset_id}")
 async def get_dataset(
     dataset_id: int,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_verified_user)
+    db: Session = Depends(get_db)
 ):
     """
     Get dataset details and preview
     """
-    dataset = db.query(Dataset).filter(
-        Dataset.id == dataset_id,
-        Dataset.user_id == current_user.id
-    ).first()
+    dataset = db.query(Dataset).filter(Dataset.id == dataset_id).first()
 
     if not dataset:
         raise HTTPException(status_code=404, detail="Dataset not found")
@@ -160,23 +151,21 @@ async def get_dataset(
 @router.delete("/{dataset_id}")
 async def delete_dataset(
     dataset_id: int,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_verified_user)
+    db: Session = Depends(get_db)
 ):
     """
     Delete a dataset
     """
-    dataset = db.query(Dataset).filter(
-        Dataset.id == dataset_id,
-        Dataset.user_id == current_user.id
-    ).first()
+    dataset = db.query(Dataset).filter(Dataset.id == dataset_id).first()
 
     if not dataset:
         raise HTTPException(status_code=404, detail="Dataset not found")
 
     try:
         # Delete associated processing jobs first
-        jobs = db.query(ProcessingJob).filter(ProcessingJob.dataset_id == dataset_id).all()
+        jobs = db.query(ProcessingJob).filter(
+            ProcessingJob.dataset_id == dataset_id
+        ).all()
         for job in jobs:
             # Delete cleaned files if they exist
             if job.output_file_path and os.path.exists(job.output_file_path):
@@ -201,18 +190,14 @@ async def delete_dataset(
 @router.get("/{dataset_id}/download")
 async def download_dataset(
     dataset_id: int,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_verified_user)
+    db: Session = Depends(get_db)
 ):
     """
     Download the cleaned dataset file
     """
     from fastapi.responses import FileResponse
 
-    dataset = db.query(Dataset).filter(
-        Dataset.id == dataset_id,
-        Dataset.user_id == current_user.id
-    ).first()
+    dataset = db.query(Dataset).filter(Dataset.id == dataset_id).first()
     if not dataset:
         raise HTTPException(status_code=404, detail="Dataset not found")
 
@@ -244,15 +229,15 @@ async def download_dataset(
 
 @router.delete("/")
 async def delete_all_datasets(
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_verified_user)
+    db: Session = Depends(get_db)
 ):
     """
-    Delete all datasets and their associated jobs for the current user
+    Delete all datasets and their associated jobs
+    (no user filter since auth is disabled)
     """
     try:
-        # Get all datasets for the current user
-        datasets = db.query(Dataset).filter(Dataset.user_id == current_user.id).all()
+        # Get all datasets (no user filter since auth is disabled)
+        datasets = db.query(Dataset).all()
 
         # Delete all processing jobs first
         all_jobs = db.query(ProcessingJob).all()
@@ -271,7 +256,10 @@ async def delete_all_datasets(
 
         db.commit()
 
-        return {"message": f"Successfully deleted {len(datasets)} datasets and {len(all_jobs)} jobs"}
+        return {
+            "message": f"Successfully deleted {len(datasets)} datasets "
+            f"and {len(all_jobs)} jobs"
+        }
 
     except Exception as e:
         db.rollback()

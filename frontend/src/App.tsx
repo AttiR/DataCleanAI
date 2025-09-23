@@ -4,8 +4,6 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { CssBaseline, Box } from '@mui/material';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import { AuthProvider } from './contexts/AuthContext';
-import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
@@ -15,9 +13,6 @@ import DatasetDetail from './pages/DatasetDetail';
 import Analysis from './pages/Analysis';
 import Cleaning from './pages/Cleaning';
 import Jobs from './pages/Jobs';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import VerifyEmail from './pages/VerifyEmail';
 
 // Create a theme instance
 const theme = createTheme({
@@ -147,75 +142,56 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <AuthProvider>
-          <Router>
-            <Box sx={{
-              minHeight: '100vh',
-              width: '100%',
-              display: 'flex',
-              flexDirection: 'column'
-            }}>
-              <Routes>
-                {/* Public routes - Full page layout */}
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/verify-email" element={<VerifyEmail />} />
+        <Router>
+          <Box sx={{
+            minHeight: '100vh',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column'
+          }}>
+            <Routes>
+              {/* Public routes - Full page layout */}
+              <Route path="/" element={<Home />} />
 
-                {/* Protected routes - With sidebar layout */}
-                <Route path="/dashboard" element={
-                  <ProtectedRoute>
-                    <Layout>
-                      <Dashboard />
-                    </Layout>
-                  </ProtectedRoute>
-                } />
-                <Route path="/upload" element={
-                  <ProtectedRoute>
-                    <Layout>
-                      <DatasetUpload />
-                    </Layout>
-                  </ProtectedRoute>
-                } />
-                <Route path="/datasets" element={
-                  <ProtectedRoute>
-                    <Layout>
-                      <DatasetList />
-                    </Layout>
-                  </ProtectedRoute>
-                } />
-                <Route path="/datasets/:id" element={
-                  <ProtectedRoute>
-                    <Layout>
-                      <DatasetDetail />
-                    </Layout>
-                  </ProtectedRoute>
-                } />
-                <Route path="/datasets/:id/analysis" element={
-                  <ProtectedRoute>
-                    <Layout>
-                      <Analysis />
-                    </Layout>
-                  </ProtectedRoute>
-                } />
-                <Route path="/datasets/:id/cleaning" element={
-                  <ProtectedRoute>
-                    <Layout>
-                      <Cleaning />
-                    </Layout>
-                  </ProtectedRoute>
-                } />
-                <Route path="/jobs" element={
-                  <ProtectedRoute>
-                    <Layout>
-                      <Jobs />
-                    </Layout>
-                  </ProtectedRoute>
-                } />
-              </Routes>
-            </Box>
-          </Router>
-        </AuthProvider>
+              {/* All routes now public - With sidebar layout */}
+              <Route path="/dashboard" element={
+                <Layout>
+                  <Dashboard />
+                </Layout>
+              } />
+              <Route path="/upload" element={
+                <Layout>
+                  <DatasetUpload />
+                </Layout>
+              } />
+              <Route path="/datasets" element={
+                <Layout>
+                  <DatasetList />
+                </Layout>
+              } />
+              <Route path="/datasets/:id" element={
+                <Layout>
+                  <DatasetDetail />
+                </Layout>
+              } />
+              <Route path="/datasets/:id/analysis" element={
+                <Layout>
+                  <Analysis />
+                </Layout>
+              } />
+              <Route path="/datasets/:id/cleaning" element={
+                <Layout>
+                  <Cleaning />
+                </Layout>
+              } />
+              <Route path="/jobs" element={
+                <Layout>
+                  <Jobs />
+                </Layout>
+              } />
+            </Routes>
+          </Box>
+        </Router>
       </ThemeProvider>
     </QueryClientProvider>
   );

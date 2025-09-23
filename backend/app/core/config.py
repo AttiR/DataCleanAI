@@ -6,9 +6,8 @@ class Settings(BaseSettings):
     # Database
     DATABASE_URL: str = "sqlite:///./database/autodatafix.db"
 
-    # Security
-    SECRET_KEY: str
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
+    # Security (removed auth-related settings)
+    SECRET_KEY: str = "dummy-secret-key-for-no-auth-mode"
 
     # API
     API_V1_STR: str = "/api/v1"
@@ -20,16 +19,7 @@ class Settings(BaseSettings):
     # CORS
     BACKEND_CORS_ORIGINS: list = ["http://localhost:3000", "http://127.0.0.1:3000"]
 
-    # Email Settings
-    MAIL_USERNAME: str = "your-email@gmail.com"
-    MAIL_PASSWORD: str = "your-app-password"
-    MAIL_FROM: str = "your-email@gmail.com"
-    MAIL_PORT: int = 587
-    MAIL_SERVER: str = "smtp.gmail.com"
-    MAIL_STARTTLS: bool = True
-    MAIL_SSL_TLS: bool = False
-    USE_CREDENTIALS: bool = True
-    VALIDATE_CERTS: bool = True
+    # Email Settings (removed since auth is disabled)
 
     # File Upload
     MAX_FILE_SIZE: int = 100 * 1024 * 1024  # 100MB
@@ -42,7 +32,6 @@ class Settings(BaseSettings):
 
     # Debug
     DEBUG: bool = True
-    ENABLE_EMAIL_IN_DEV: bool = False
 
     class Config:
         env_file = ".env"

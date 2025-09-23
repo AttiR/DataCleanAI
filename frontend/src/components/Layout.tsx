@@ -13,11 +13,6 @@ import {
   Typography,
   useTheme,
   useMediaQuery,
-  Menu,
-  MenuItem,
-  Avatar,
-  Divider,
-  Chip,
 } from '@mui/material';
 import {
   Menu as MenuIcon,
@@ -25,12 +20,8 @@ import {
   CloudUpload as UploadIcon,
   Storage as DatasetIcon,
   Work as JobsIcon,
-  Logout,
-  Settings,
-  Email,
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
 
 const drawerWidth = 240;
 
@@ -47,12 +38,10 @@ const menuItems = [
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, logout } = useAuth();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -63,20 +52,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     if (isMobile) {
       setMobileOpen(false);
     }
-  };
-
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleProfileMenuClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleLogout = () => {
-    logout();
-    handleProfileMenuClose();
-    navigate('/login');
   };
 
   const drawer = (
@@ -129,6 +104,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           width: { md: `calc(100% - ${drawerWidth}px)` },
           ml: { md: `${drawerWidth}px` },
           zIndex: theme.zIndex.drawer + 1,
+          backgroundColor: 'transparent',
+          boxShadow: 'none',
         }}
       >
         <Toolbar>
@@ -144,80 +121,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
             AutoDataFix
           </Typography>
-
-          {/* User Profile Section */}
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            {user && !user.is_email_verified && (
-              <Chip
-                icon={<Email />}
-                label="Verify Email"
-                color="warning"
-                size="small"
-                onClick={() => navigate('/verify-email')}
-                sx={{ mr: 1 }}
-              />
-            )}
-
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls="primary-search-account-menu"
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <Avatar sx={{ width: 32, height: 32, bgcolor: 'secondary.main' }}>
-                {user?.username?.charAt(0).toUpperCase() || 'U'}
-              </Avatar>
-            </IconButton>
-
-            <Menu
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorEl)}
-              onClose={handleProfileMenuClose}
-            >
-              <Box sx={{ px: 2, py: 1 }}>
-                <Typography variant="subtitle2" fontWeight="bold">
-                  {user?.full_name || user?.username}
-                </Typography>
-                <Typography variant="caption" color="text.secondary">
-                  {user?.email}
-                </Typography>
-                {user && !user.is_email_verified && (
-                  <Chip
-                    icon={<Email />}
-                    label="Email not verified"
-                    color="warning"
-                    size="small"
-                    sx={{ mt: 1 }}
-                  />
-                )}
-              </Box>
-              <Divider />
-              <MenuItem onClick={handleProfileMenuClose}>
-                <ListItemIcon>
-                  <Settings fontSize="small" />
-                </ListItemIcon>
-                <ListItemText>Settings</ListItemText>
-              </MenuItem>
-              <MenuItem onClick={handleLogout}>
-                <ListItemIcon>
-                  <Logout fontSize="small" />
-                </ListItemIcon>
-                <ListItemText>Logout</ListItemText>
-              </MenuItem>
-            </Menu>
-          </Box>
         </Toolbar>
       </AppBar>
 
