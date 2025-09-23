@@ -143,21 +143,21 @@ const DatasetUpload: React.FC = () => {
             {...getRootProps()}
             sx={{
               border: '2px dashed',
-              borderColor: isDragActive ? 'primary.main' : 'grey.300',
+              borderColor: isDragActive ? '#ff6b35' : 'grey.300',
               borderRadius: 2,
               p: 4,
               textAlign: 'center',
               cursor: 'pointer',
-              backgroundColor: isDragActive ? 'primary.50' : 'grey.50',
+              backgroundColor: isDragActive ? 'rgba(255, 107, 53, 0.1)' : 'grey.50',
               transition: 'all 0.2s ease',
               '&:hover': {
-                borderColor: 'primary.main',
-                backgroundColor: 'primary.50',
+                borderColor: '#ff6b35',
+                backgroundColor: 'rgba(255, 107, 53, 0.1)',
               },
             }}
           >
             <input {...getInputProps()} />
-            <UploadIcon sx={{ fontSize: 48, color: 'primary.main', mb: 2 }} />
+            <UploadIcon sx={{ fontSize: 48, color: '#ff6b35', mb: 2 }} />
             <Typography variant="h6" gutterBottom>
               {isDragActive ? 'Drop the file here' : 'Drag & drop a dataset file here'}
             </Typography>
@@ -189,7 +189,7 @@ const DatasetUpload: React.FC = () => {
                 <Chip
                   label={acceptedFiles[0].type || 'Unknown type'}
                   size="small"
-                  color="primary"
+                  sx={{ backgroundColor: '#ff6b35', color: 'white' }}
                 />
               </Box>
             </Box>
@@ -210,12 +210,26 @@ const DatasetUpload: React.FC = () => {
                 variant="contained"
                 startIcon={<CheckCircleIcon />}
                 onClick={handleViewDataset}
+                sx={{
+                  backgroundColor: '#ff6b35',
+                  '&:hover': {
+                    backgroundColor: '#e55a2b',
+                  },
+                }}
               >
                 View Dataset
               </Button>
               <Button
                 variant="outlined"
                 onClick={handleAnalyzeDataset}
+                sx={{
+                  borderColor: '#ff6b35',
+                  color: '#ff6b35',
+                  '&:hover': {
+                    borderColor: '#e55a2b',
+                    backgroundColor: 'rgba(255, 107, 53, 0.1)',
+                  },
+                }}
               >
                 Analyze Quality
               </Button>
@@ -225,6 +239,14 @@ const DatasetUpload: React.FC = () => {
                   setUploadStatus('idle');
                   setUploadMessage('');
                   setUploadedDataset(null);
+                }}
+                sx={{
+                  borderColor: '#4ecdc4',
+                  color: '#4ecdc4',
+                  '&:hover': {
+                    borderColor: '#3bb5b0',
+                    backgroundColor: 'rgba(78, 205, 196, 0.1)',
+                  },
                 }}
               >
                 Upload Another

@@ -494,40 +494,118 @@ const Dashboard: React.FC = () => {
     }}>
       {/* Header Section */}
       <Box sx={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        mb: 4,
-        p: { xs: 2, sm: 3, md: 4 },
-        backgroundColor: 'background.paper',
-        borderBottom: '1px solid',
-        borderColor: 'divider',
+        background: 'linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #4ecdc4 100%)',
+        color: 'white',
+        borderRadius: 0,
+        mb: 3,
+        p: { xs: 2, sm: 2.5, md: 3 },
+        position: 'relative',
+        overflow: 'hidden',
+        mt: 0,
+        width: '100%',
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
+          pointerEvents: 'none',
+        }
       }}>
-        <Box>
-          <Typography variant="h4" component="h1" gutterBottom>
-            Dashboard
-          </Typography>
-          <Typography variant="body1" color="text.secondary">
-            Monitor your data quality and processing status
-          </Typography>
-        </Box>
-        <Box sx={{ display: 'flex', gap: 2 }}>
-          <Button
-            variant="contained"
-            startIcon={<UploadIcon />}
-            onClick={() => navigate('/upload')}
-          >
-            Upload Dataset
-          </Button>
-          {stats.total > 0 && (
-            <Button
-              variant="outlined"
-              color="error"
-              onClick={() => setClearDialogOpen(true)}
-            >
-              Clear All Data
-            </Button>
-          )}
+        <Box sx={{ position: 'relative', zIndex: 1 }}>
+          <Box sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: 2
+          }}>
+            <Box sx={{ flex: 1, minWidth: 300 }}>
+              <Typography
+                variant="h4"
+                component="h1"
+                gutterBottom
+                sx={{
+                  fontWeight: 'bold',
+                  mb: 1,
+                  background: 'linear-gradient(45deg, #fff, #f0f8ff)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  fontSize: { xs: '1.5rem', md: '1.8rem' }
+                }}
+              >
+                🚀 Data Quality Dashboard
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{
+                  opacity: 0.95,
+                  fontWeight: 500,
+                  fontSize: { xs: '0.9rem', md: '1rem' }
+                }}
+              >
+                Monitor your data quality and processing status with AI-powered insights
+              </Typography>
+            </Box>
+            <Box sx={{
+              display: 'flex',
+              gap: 2,
+              flexWrap: 'wrap',
+              justifyContent: { xs: 'center', md: 'flex-end' }
+            }}>
+              <Button
+                variant="contained"
+                startIcon={<UploadIcon />}
+                onClick={() => navigate('/upload')}
+                sx={{
+                  py: 1,
+                  px: 3,
+                  fontSize: '0.9rem',
+                  fontWeight: 600,
+                  borderRadius: 2,
+                  background: 'linear-gradient(45deg, #ffffff, #f8f9fa)',
+                  color: '#ff6b35',
+                  boxShadow: '0 4px 15px rgba(255, 107, 53, 0.3)',
+                  '&:hover': {
+                    background: 'linear-gradient(45deg, #f8f9fa, #e9ecef)',
+                    boxShadow: '0 6px 20px rgba(255, 107, 53, 0.4)',
+                    transform: 'translateY(-2px)',
+                  },
+                  transition: 'all 0.3s ease',
+                }}
+              >
+                📁 Upload Dataset
+              </Button>
+              {stats.total > 0 && (
+                <Button
+                  variant="outlined"
+                  onClick={() => setClearDialogOpen(true)}
+                  sx={{
+                    py: 1,
+                    px: 3,
+                    fontSize: '0.9rem',
+                    fontWeight: 600,
+                    borderRadius: 2,
+                    borderColor: 'rgba(255, 255, 255, 0.8)',
+                    color: 'white',
+                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                    backdropFilter: 'blur(10px)',
+                    '&:hover': {
+                      borderColor: 'white',
+                      backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                      transform: 'translateY(-2px)',
+                    },
+                    transition: 'all 0.3s ease',
+                  }}
+                >
+                  🗑️ Clear All Data
+                </Button>
+              )}
+            </Box>
+          </Box>
         </Box>
       </Box>
 

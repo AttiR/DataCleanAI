@@ -57,7 +57,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const drawer = (
     <Box>
       <Toolbar>
-        <Typography variant="h6" noWrap component="div" sx={{ fontWeight: 'bold' }}>
+        <Typography variant="h6" noWrap component="div" sx={{ fontWeight: 'bold', color: '#ff6b35' }}>
           AutoDataFix
         </Typography>
       </Toolbar>
@@ -69,10 +69,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               onClick={() => handleNavigation(item.path)}
               sx={{
                 '&.Mui-selected': {
-                  backgroundColor: 'primary.main',
+                  backgroundColor: '#ff6b35',
                   color: 'white',
                   '&:hover': {
-                    backgroundColor: 'primary.dark',
+                    backgroundColor: '#e55a2b',
                   },
                 },
               }}
@@ -170,11 +170,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           flexDirection: 'column',
         }}
       >
-        <Toolbar />
         <Box sx={{
           flex: 1,
           width: '100%',
-          padding: { xs: 2, sm: 3, md: 4 },
           backgroundColor: 'background.default',
         }}>
           {children}
