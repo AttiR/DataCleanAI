@@ -118,9 +118,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-            AutoDataFix
-          </Typography>
         </Toolbar>
       </AppBar>
 
