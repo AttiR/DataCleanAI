@@ -1,3 +1,11 @@
+#
+## Demo Video
+
+See DataCleanAI in action:
+
+[![Watch the demo](demo/demo-thumbnail.png)](demo/demo.mp4)
+
+Place your demo video file (e.g., demo.mp4) and a thumbnail image (demo-thumbnail.png) in the `demo/` folder. If you have a YouTube or online video, replace the link above with your video URL.
 # DataCleanAI - AI-Powered Data Quality System
 
 [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://python.org)
@@ -48,16 +56,27 @@ DataCleanAI/
 
 ### Installation
 
-#### Option 1: Quick Setup (Recommended)
-All start and setup scripts are located in the `scripts/` folder.
+#### Option 1: Automated Setup (Recommended)
+Use the professional setup script to install all dependencies and initialize the project:
 ```bash
-cd scripts
-./start_backend.sh
-./start_frontend.sh
-```
-# Clone and navigate
 git clone <repository-url>
-cd AutoDataFix
+cd DataCleanAI
+chmod +x scripts/setup.sh
+./scripts/setup.sh
+```
+
+This script will:
+- Check prerequisites (Python, Node.js, npm)
+- Set up the Python virtual environment
+- Install backend and frontend dependencies
+- Initialize the database and directories
+- Run initial tests and set up development tools
+
+After setup, start the backend and frontend:
+```bash
+./scripts/start_backend.sh
+./scripts/start_frontend.sh
+```
 
 # Run setup script
 ./scripts/install_dependencies.sh
