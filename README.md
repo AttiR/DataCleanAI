@@ -12,7 +12,7 @@ An advanced AI-powered system that automatically detects and rectifies common da
 
 See DataCleanAI in action:
 
-[![Watch the demo](demo/demo-thumbnail.png)](demo/demo.mp4)
+[![Watch the demo](demo/demo-thumbnail.png)](demo/)
 
 Demo video is in demo/
 
