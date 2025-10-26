@@ -5,7 +5,8 @@ See DataCleanAI in action:
 
 [![Watch the demo](demo/demo-thumbnail.png)](demo/demo.mp4)
 
-Place your demo video file (e.g., demo.mp4) and a thumbnail image (demo-thumbnail.png) in the `demo/` folder. If you have a YouTube or online video, replace the link above with your video URL.
+Demo video is in demo/
+
 # DataCleanAI - AI-Powered Data Quality System
 
 [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://python.org)
