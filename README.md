@@ -1,13 +1,4 @@
-#
-## Demo Video
-
-See DataCleanAI in action:
-
-[![Watch the demo](demo/demo-thumbnail.png)](demo/demo.mp4)
-
-Demo video is in demo/
-
-# DataCleanAI - AI-Powered Data Quality System
+## DataCleanAI - AI-Powered Data Quality System
 
 [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.108+-green.svg)](https://fastapi.tiangolo.com)
@@ -16,6 +7,14 @@ Demo video is in demo/
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 An advanced AI-powered system that automatically detects and rectifies common data quality issues, making datasets ready for analysis or modeling.
+
+## Demo Video
+
+See DataCleanAI in action:
+
+[![Watch the demo](demo/demo-thumbnail.png)](demo/demo.mp4)
+
+Demo video is in demo/
 
 ## Project Architecture
 
