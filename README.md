@@ -8,7 +8,7 @@
 
 An advanced AI-powered system that automatically detects and rectifies common data quality issues, making datasets ready for analysis or modeling.
 
-## 🏗️ Project Architecture
+## Project Architecture
 
 This project follows clean software architecture principles with clear separation of concerns:
 
@@ -39,7 +39,7 @@ DataCleanAI/
 └── 📄 README.md                 # Project overview
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Python 3.9+ (Python 3.12 recommended)
@@ -127,7 +127,7 @@ npm start
 - **Hyperparameter Tuning**: Bayesian optimization
 - **Cross-Validation**: Robust model evaluation
 
-## 🧪 Testing
+## Testing
 
 ### Run Tests
 ```bash
@@ -150,12 +150,7 @@ python tests/unit/test_data_quality.py
 python tests/unit/test_core_functionality.py
 ```
 
-## 📚 Documentation
-
-- **[Contributing Guide](docs/CONTRIBUTING.md)** - Development setup and contribution guidelines
-- **[Architecture Guide](docs/ARCHITECTURE.md)** - System architecture overview
-
-## 🛠️ Development
+## Development
 
 ### Project Structure Guidelines
 - **backend/app/**: Follow FastAPI best practices
@@ -170,7 +165,7 @@ python tests/unit/test_core_functionality.py
 - **Testing**: Jest for frontend, pytest for backend
 - **Documentation**: Comprehensive docstrings and README files
 
-## 🐳 Deployment
+## Deployment
 
 ### Simple Deployment
 ```bash
@@ -181,7 +176,7 @@ cd backend && uvicorn app.main:app --host 0.0.0.0 --port 8000
 cd frontend && npm start
 ```
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -189,8 +184,6 @@ cd frontend && npm start
 4. Add tests for new functionality
 5. Update documentation
 6. Submit a pull request
-
-See [CONTRIBUTING.md](docs/CONTRIBUTING.md) for detailed guidelines.
 
 ## 📄 License
 
